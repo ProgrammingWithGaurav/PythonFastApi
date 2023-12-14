@@ -21,4 +21,5 @@ async def read_item(request: Request):
             "id": doc['_id'],
             "note": doc['note']
         })
-    return templates.TemplateResponse("index.html", {"request": request, newDocs: newDocs})
+    print(newDocs)
+    return templates.TemplateResponse("index.html", {"request": request, "newDocs": newDocs})
