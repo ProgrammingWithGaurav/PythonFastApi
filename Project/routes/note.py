@@ -6,6 +6,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from config.db import client
 from schema.note import Note_Entity, NotesEntity
+from typing import Annotated
 
 note = APIRouter()
 templates = Jinja2Templates(directory="templates")
@@ -23,19 +24,13 @@ async def read_item(request: Request):
         })
     print(newDocs)
     return templates.TemplateResponse("index.html", {"request": request, "newDocs": newDocs})
-    
-@note.post('/')
-def add_note(note: Note):
-    inserted_note = client.notes.notes.insert_one(dict(note))
-    return Note_Entity(inserted_note)
-
+  
 @note.post('/')
 async def create_item(request: Request):
     form = await request.form()
-    print(form)
     formDict = dict(form)
-    formDict['important'] = True if formDict['important'] == "on" else False
-    note = client.notes.notes.insert_one(form)
+    formDict['important'] = True if formDict.get('important') == "on" else False
+    note =  client.notes.notes.insert_one(formDict)
 
     return {"Success": True }
 

@@ -1,4 +1,4 @@
-def Note_Entity(item) -> dict: # return dictionary
+def Note_Entity(item) -> dict: # item of type dictionary
     return {
         'id': str(item['_id']),
         "title": item['title'],

@@ -88,9 +88,19 @@
     <div class="container">
       <h2>Your Notes</h2>
       {% if newDocs is not defined %} No Notes to Display {% endif %} 
-      
       {% for note in newDocs %}
-        <div>{{ note.desc }}</div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{note.title}}</h5>
+              <p class="card-text">{{note.desc}}</p>
+              {% if note.important is sameas true %}
+              <a href="#" class="btn-sm btn btn-success rounded-lg">Important</a>
+
+              {% endif %}
+            </div>
+          </div>
+        </div>
       {% endfor %}
     </div>
     <script
