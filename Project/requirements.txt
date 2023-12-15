@@ -2,3 +2,4 @@ flask
 fastapi
 python-multipart
 uvicorn
+pymongo
