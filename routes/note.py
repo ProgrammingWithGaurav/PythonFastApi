@@ -31,6 +31,6 @@ async def create_item(request: Request):
     formDict = dict(form)
     formDict['important'] = True if formDict.get('important') == "on" else False
     note =  client.notes.notes.insert_one(formDict)
-
+    
     return {"Success": True }
 
